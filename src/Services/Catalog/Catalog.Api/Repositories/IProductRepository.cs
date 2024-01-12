@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace Catalog.Api.Repositories
 {
-    public interface IProductRepositories
+    public interface IProductRepository
     {
         Task<IEnumerable<Products>> GetProducts();
         Task<Products> GetProduct(string id);

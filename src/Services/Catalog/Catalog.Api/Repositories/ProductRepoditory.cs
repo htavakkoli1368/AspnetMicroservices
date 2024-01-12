@@ -4,11 +4,11 @@ using MongoDB.Driver;
 
 namespace Catalog.Api.Repositories
 {
-    public class ProductRepoditories : IProductRepositories
+    public class ProductRepoditory : IProductRepository
     {
         public readonly ICatalogContext _context;
 
-        public ProductRepoditories(ICatalogContext context)
+        public ProductRepoditory(ICatalogContext context)
         {
             _context = context?? throw new ArgumentNullException(nameof(context));
         }
