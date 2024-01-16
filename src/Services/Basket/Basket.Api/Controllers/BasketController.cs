@@ -1,6 +1,11 @@
 ﻿using Basket.Api.Entities;
 using Basket.Api.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Net; 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Basket.Api.Controllers
 {
@@ -26,7 +31,7 @@ namespace Basket.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ShoppingCart))]
         public async Task<ActionResult<ShoppingCart>> UpdateBasket([FromBody] ShoppingCart basket)
         {             
-            return new OkObjectResult(_repository.UpdateBasket(basket));
+            return new OkObjectResult( await _repository.UpdateBasket(basket));
         }
 
         [HttpDelete("{username}", Name ="DeleteBasket")]
