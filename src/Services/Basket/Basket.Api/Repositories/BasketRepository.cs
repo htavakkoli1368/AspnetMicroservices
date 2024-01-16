@@ -25,13 +25,14 @@ namespace Basket.Api.Repositories
              
 
         }
-        public Task<ShoppingCart> UpdateBasket(ShoppingCart basket)
+        public async Task<ShoppingCart> UpdateBasket(ShoppingCart basket)
         {
-            throw new NotImplementedException();
+            await _redisCache.SetStringAsync(basket.UserName, JsonConvert.SerializeObject(basket));
+            return await GetBasket(basket.UserName);
         }
         public Task DeleteBasket(string username)
         {
-            throw new NotImplementedException();
+            return _redisCache.RemoveAsync(username);
         }
     }
 }
