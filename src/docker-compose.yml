@@ -3,8 +3,8 @@ version: '3.4'
 services:
   catalogdb:
     image: mongo
-  basketdb:
-    image: redis:alpine 
+  redisDB:
+    image: redis:latest
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
