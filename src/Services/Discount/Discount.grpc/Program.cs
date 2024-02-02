@@ -1,3 +1,4 @@
+using Discount.grpc.Repository;
 using Discount.grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
-
+builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
