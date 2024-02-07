@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Basket.Api.GrpcServices;
 
 namespace Basket.Api.Controllers
 {
@@ -14,10 +15,14 @@ namespace Basket.Api.Controllers
     public class BasketController : ControllerBase
     {
         public readonly IBasketRepository _repository;
+        public readonly DiscountGrpcServices _discountGrpcServices;
 
-        public BasketController(IBasketRepository basketRepository)
+        
+
+        public BasketController(IBasketRepository basketRepository, DiscountGrpcServices discountGrpcServices)
         {
             _repository = basketRepository;
+            _discountGrpcServices = discountGrpcServices;
         }
         [HttpGet("{username}",Name = "GetBasket")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ShoppingCart))]
@@ -30,7 +35,13 @@ namespace Basket.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ShoppingCart))]
         public async Task<ActionResult<ShoppingCart>> UpdateBasket([FromBody] ShoppingCart basket)
-        {             
+        {
+            foreach (var item in basket.Items)
+            {
+               var coupon = await  _discountGrpcServices.Getdiscount(item.ProductName);
+                item.Price -= coupon.Amount;
+            }
+
             return new OkObjectResult( await _repository.UpdateBasket(basket));
         }
 
