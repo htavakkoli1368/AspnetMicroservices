@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿ using AutoMapper;
 using MediatR;
 using MediatR.Pipeline;
 using Ordering.Application.Contracts.Persistence;

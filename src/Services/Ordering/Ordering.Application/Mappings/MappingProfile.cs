@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Ordering.Application.Features.Orders.Commands.CheckOutOrder;
 using Ordering.Application.Features.Orders.Queries.GetOrderList;
 using Ordering.Domain.Entities;
 using System;
@@ -14,6 +15,7 @@ namespace Ordering.Application.Mappings
         public MappingProfile()
         {
             CreateMap<Order,OrdersVm>().ReverseMap();
+            CreateMap<Order,CheckoutOrderCommand>().ReverseMap();
         }
     }
 }
