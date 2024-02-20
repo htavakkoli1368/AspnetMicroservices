@@ -37,8 +37,8 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
 
             return Unit.Value;
         }
-
-        public async Task IRequestHandler<UpdateOrderCommand>.Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
+      
+         async Task IRequestHandler<UpdateOrderCommand>.Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
             var orderToUpdate = await _orderRepository.GetByIdAsync(request.Id);
             if (orderToUpdate == null)
